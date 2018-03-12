@@ -1,2 +1,14 @@
-#node
-**/node_modules/
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+
+# generate
+dist
+
+# System
+.DS_Store
+
+# Build
+build
