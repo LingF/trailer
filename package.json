@@ -28,7 +28,9 @@
   },
   "homepage": "https://github.com/LingF/trailer#readme",
   "dependencies": {
-    "koa": "^2.5.0"
+    "ejs": "^2.5.7",
+    "koa": "^2.5.0",
+    "pug": "^2.0.1"
   },
   "devDependencies": {
     "commitizen": "^2.9.6",
