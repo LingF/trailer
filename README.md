@@ -10,4 +10,4 @@ koa2项目
 2. ejs  _Embedded JavaScript templates_
 3. pug 模版引擎，更简便
 4. koa-views
-5. 
+5. DPlayer
