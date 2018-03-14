@@ -11,3 +11,4 @@ koa2项目
 3. pug 模版引擎，更简便
 4. koa-views
 5. DPlayer
+6. Puppeteer
