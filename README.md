@@ -12,3 +12,4 @@ koa2项目
 4. koa-views
 5. DPlayer
 6. Puppeteer
+7. request request-promise-native
