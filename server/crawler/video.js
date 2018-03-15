@@ -1,12 +1,11 @@
 /**
  * 豆瓣电影地址
- * http://vt1.doubanio.com/201803152138/713edeeb7de9c2b70e2c8e441c28fb79/view/movie/M/302270587.mp4
  */
 
 const puppeteer = require('puppeteer')
 
 const base = 'https://movie.douban.com/subject/'
-const doubanId = '26752852'
+const doubanId = '26735288'
 const videoBase = 'https://movie.douban.com/trailer/227587/#content'
 
 const sleep = time => new Promise(resolve => {
