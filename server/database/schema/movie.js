@@ -1,10 +1,19 @@
 /* 电影数据模型 */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const Mixed = Schema.Types.Mixed  // 可以存任何类型
+const { Mixed, ObjectId } = Schema.Types  // 可以存任何类型
 
 const movieSchema = new Schema({
-  doubanId: String,
+  doubanId: {
+    unique: true,
+    type: String
+  },
+
+  category: {
+    type: ObjectId,
+    ref: 'Category'  // 指向关系，指向的模型
+  },
+
   rate: Number,
   title: String,
   summary: String,
@@ -33,6 +42,16 @@ const movieSchema = new Schema({
       default: Date.now()
     }
   }
+})
+
+movieSchema.pre('save', next => {
+  if (this.isNew) {
+    this.meta.createdAt = this.meta.updateAt = Date.now()
+  } else {
+    this.meta.updateAt = Date.now()
+  }
+
+  next()
 })
 
 // 参数：模型名字，发布生成所需要的 Schema

@@ -29,6 +29,7 @@
   "homepage": "https://github.com/LingF/trailer#readme",
   "dependencies": {
     "ejs": "^2.5.7",
+    "glob": "^7.1.2",
     "koa": "^2.5.0",
     "koa-views": "^6.1.4",
     "mongoose": "^5.0.10",
