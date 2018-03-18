@@ -13,4 +13,6 @@ koa2项目
 5. DPlayer
 6. Puppeteer
 7. request request-promise-native
-8. mongoose  _mongodb   mvc - c > m_
+8. qiniu
+9. nanoid
+10. mongoose  _mongodb   mvc - c > m_
