@@ -9,10 +9,10 @@ const movieSchema = new Schema({
     type: String
   },
 
-  category: {
+  category: [{
     type: ObjectId,
     ref: 'Category'  // 指向关系，指向的模型
-  },
+  }],
 
   rate: Number,
   title: String,
@@ -44,7 +44,7 @@ const movieSchema = new Schema({
   }
 })
 
-movieSchema.pre('save', next => {
+movieSchema.pre('save', function(next) {
   if (this.isNew) {
     this.meta.createdAt = this.meta.updateAt = Date.now()
   } else {

@@ -8,16 +8,16 @@ const { connect, initSchemas } = require('./database/init')
   await connect()
 
   // 初始化 schema，然后都可以发布，生成模型，模型注入mongoose
-  // try {
-    initSchemas()
+  initSchemas()
 
-    // 不同于发布，这里一个参数则是获取对应model
-    const Movie = mongoose.model('Movie')
-    const movies = await Movie.find({})
-    console.log(movies)
-  // } catch (err) {
-  //   console.log(err)
-  // }
+  // 不同于发布，这里一个参数则是获取对应model
+  // const Movie = mongoose.model('Movie')
+  // const movies = await Movie.find({})
+  // console.log(movies)
+
+  // require('./tasks/movie')
+  require('./tasks/api')
+
 })()
 
 const app = new Koa()
