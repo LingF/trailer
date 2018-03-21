@@ -1,15 +1,11 @@
-const Router = require('koa-router')
 const mongoose = require('mongoose')
-const router = new Router()
+const { controller, get, post, put } = require('../lib/decorator')
 
 // 装饰器；控制器，前缀；外层 - 路径空间
 @controller('/api/v0/movies')
 export class movieController {
 
   @get('/')
-  // @login
-  // @admin(['developer'])
-  // @log
   async getMovies (ctx, next) {
     const Movie = mongoose.model('Movie')
     const movies = await Movie.find({}).sort({
@@ -36,5 +32,3 @@ export class movieController {
     }
   }
 }
-
-module.exports = router

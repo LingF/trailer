@@ -17,3 +17,4 @@ koa2项目
 9. nanoid
 10. mongoose  _mongodb   mvc - c > m_
 11. koa-router
+12. lodash
