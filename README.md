@@ -1,7 +1,12 @@
 ## trailer
 koa2项目
 
-## modules
+### run
+``` cmd
+    node start 
+```
+
+### modules
 1. cz-conventional-changelog  _commit模版_
 ``` cmd
     npm install -g commitizen cz-conventional-changelog

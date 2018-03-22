@@ -39,17 +39,19 @@ export class Route {
 }
 
 // /开头返回path，否则加上
-const normalizePath = path => path.startsWidth('/') ? path : `/${path}`
+const normalizePath = path => path.startsWith('/') ? path : `/${path}`
 
 // 修饰 +
 // conf <= { method, path }
 const router = conf => (target, key, descriptor) => {
   conf.path = normalizePath(conf.path)
-
+  console.log(conf)
   // key: target, method, path
   // value: 方法
   routerMap.set({
     target: target,
+    // path: conf.path,
+    // method: conf.method
     ...conf
   }, target[key])
 }

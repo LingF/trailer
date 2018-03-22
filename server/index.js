@@ -3,7 +3,20 @@ const mongoose = require('mongoose')
 const views = require('koa-views')
 const { resolve } = require('path')
 const { connect, initSchemas } = require('./database/init')
-const router = require('./routes')
+const R = require('ramda')
+const MIDDLEWARES = ['router']
+
+const useMiddlewares = app => {
+  R.map(
+    R.compose(
+      R.forEachObjIndexed(
+        initWidth => initWidth(app)
+      ),
+      require,
+      name => resolve(__dirname, `./middlewares/${name}`)
+    )
+  )(MIDDLEWARES)
+}
 
 ;(async () => {
   await connect()
@@ -19,25 +32,15 @@ const router = require('./routes')
   // require('./tasks/movie')
   require('./tasks/api')
 
+  const app = new Koa()
+  // 自己的理解：子进程开启对全局未处理rejection的处理
+  // 暂不清楚性能影响，但对错误定位有奇效，切身体会
+  process.on('unhandledRejection', error => {
+    console.log('unhandledRejection', error);
+  });
+
+  await useMiddlewares(app)
+
+  app.listen(4455)
+
 })()
-
-const app = new Koa()
-
-app.use(views(resolve(__dirname, './views'), {
-  extension: 'pug'
-}))
-
-app.use(async (ctx, next) => {
-  await ctx.render('index', {
-    you: 'Luke',
-    me: 'LingF'
-  })
-})
-
-// 自己的理解：子进程开启对全局未处理rejection的处理
-// 暂不清楚性能影响，但对错误定位有奇效，切身体会
-process.on('unhandledRejection', error => {
-  console.log('unhandledRejection', error);
-});
-
-app.listen(4455)
