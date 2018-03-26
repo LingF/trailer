@@ -23,3 +23,14 @@ koa2项目
 10. mongoose  _mongodb   mvc - c > m_
 11. koa-router
 12. lodash
+13. parcel-bundler
+14. cssnext node-sass autoprefixer
+
+### front
+* src
+    - assets 静态资源
+    - commonents 组件
+    - layouts 布局模版
+    - lib 依赖（库，工具文件）
+    - views 页面级别组件
+* index.html （spa）
