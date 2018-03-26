@@ -25,6 +25,7 @@ koa2项目
 12. lodash
 13. parcel-bundler
 14. cssnext node-sass autoprefixer
+15. nodemon koa-static
 
 ### front
 * src
