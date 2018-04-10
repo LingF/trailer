@@ -3,7 +3,7 @@ koa2项目
 
 ### run
 ``` cmd
-    node start 
+    node start
 ```
 
 ### modules
@@ -26,6 +26,7 @@ koa2项目
 13. parcel-bundler
 14. cssnext node-sass autoprefixer
 15. nodemon koa-static
+16. antd@3.0.0 react@16.1.1 react-dom@16.1.1 react-router-dom@4.2.2
 
 ### front
 * src
