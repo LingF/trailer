@@ -30,6 +30,7 @@
   "homepage": "https://github.com/LingF/trailer#readme",
   "dependencies": {
     "antd": "^3.0.0",
+    "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "ejs": "^2.5.7",
     "glob": "^7.1.2",
