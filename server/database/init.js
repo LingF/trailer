@@ -6,6 +6,7 @@ const { resolve } = require('path')
 // 使用nodejs原生的Promise,老版本mongoose的Promise跟标准的有差异
 mongoose.Promise = global.Promise
 
+// 同步拿到所有 schema
 exports.initSchemas = () => {
   // 逐个加载
   glob.sync(resolve(__dirname, './schema', '**/*.js')).forEach(require)

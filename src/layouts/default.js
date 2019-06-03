@@ -2,69 +2,81 @@ import React, {
   Component
 } from 'react'
 import {
+  Layout,
   Menu,
   Spin
 } from 'antd'
-import navRoutes from 'react-router-dom'
+
+const {
+  Header,
+  Content,
+  Footer,
+  Sider
+} = Layout;
+
+import navRoutes from '../nav'
 
 const getMenuContent = ({ path, name }) => {
-  <a href={path: path: '/'} style={{ color: '#fff2e8' }}>
-    { name }
-  </a>
+  return (
+    <a href={path ? path: '/'} style={{ color: '#fff2e8' }}>
+      { name }
+    </a>
+  )
 }
 
 export default class LayoutDefault extends Component {
-  constructor() {
-      super(props)
-      this.state = {
-        loading: false,
-        tip: '再等一下下嘛'
-      }
-    },
+  constructor(props) {
+    super(props)
+    this.state = {
+      loading: false,
+      tip: '再等一下下嘛'
+    }
+
+    this.matchRouteName = this.props.match
+      ? navRoutes.find(e => e.name === this.props.match.params.type)
+        ? navRoutes.find(e => e.name === this.props.match.params.type).name
+        : '全部'
+      : navRoutes[0].name
+
+    this.toggleLoading = (status = false, tip = '在等一下下嘛') => {
+      this.setState({
+        tip,
+        loading: status
+      })
+    }
+  }
 
   componentDidMount() {
     window.__LOADING__ = this.toggleLoading
-  },
+  }
 
   componentWillUnMount() {
     window.__LOADING__ = null
-  },
+  }
 
-  matchRouteName = this.props.match
-    ? navRoutes.find(e => e.name === this.props.match.params.type)
-      ? navRoutes.find(e => e.name === this.props.match.params.type).name
-      : '全部'
-    : navRoutes[0].name
+  render() {
+    const { children } = this.props
+    const { loading, tip } = this.state
 
-  toggleLoading = (stats = false, tip = '在等一下下嘛') => {
-    this.setState({
-      tip,
-      loading: stats
-    })
-  },
-
-    render() {
-      const { children } = this.props
-      const { loading, tip } = this.state
-
-      return (
-        <div className='flex-column' style={{ width: '100%', height: '100%' }}></div>
+    return (
+      <Layout>
+        <Header className="header">
+          <div className="logo"
+            style={{
+              marginLeft: 24,
+              marginRight: 30,
+              fontSize: 18,
+              textAlign: 'center',
+              color: '#fff !import',
+              float: 'left'
+            }}>
+            <a href='/' className='hover-scale logo-text' style={{ color: '#fff2e8' }}>黑锋骑士</a>
+          </div>
           <Menu
-            style={{ fontSize: 13.5, backgroundColor: '#000'}}
+            theme='dark'
+            style={{ fontSize: 14, lineHeight: '64px' }}
             mode='horizontal'
-            defaultSelectedKeys={[this.matchRouteName]}
-          >
-            <Menu.Item
-              style={{
-                marginLeft: 24,
-                marginRight: 30,
-                fontSize: 18,
-                textAlign: 'center',
-                color: '#fff !import',
-                float: 'left'
-              }}>
-              <a href='/' className='hover-scale logo-text' style={{ color: '#fff2e8'}}>黑锋骑士</a>
-            </Menu.Item>
+            defaultSelectedKeys={[this.matchRouteName]}>
             {
               navRoutes.map((e, i) => (
                 <Menu.Item key={e.name}>
@@ -75,6 +87,8 @@ export default class LayoutDefault extends Component {
               ))
             }
           </Menu>
+        </Header>
+        <Content style={{ padding: '0 50px', overflow: 'initial' }}>
           <Spin
             spinning={loading}
             tip={tip}
@@ -82,6 +96,11 @@ export default class LayoutDefault extends Component {
           >
             { children }
           </Spin>
-      )
-    }
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>
+          Ant Design ©2016 Created by Ant UED
+        </Footer>
+      </Layout>
+    )
+  }
 }

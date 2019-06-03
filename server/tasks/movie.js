@@ -30,10 +30,11 @@ const Movie = mongoose.model('Movie')
 
     console.log(result)
     result.forEach(async item => {
+      // 逐条查找
       let movie = await Movie.findOne({
         doubanId: item.doubanId
       })
-
+      // 未存储过则创建新数据
       if (!movie) {
         movie = new Movie(item)
         await movie.save()

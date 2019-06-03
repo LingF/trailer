@@ -23,9 +23,9 @@ async function fetchMovie(item) {
 
 ;(async () => {
 
-  // 查找条件
+  // 查找条件（不完整的数据）
   let movies = await Movie.find({
-    $or: [
+    $or: [ // 或的条件，满足以下任一条件
       { summary: { $exists: false } },
       { summary: null },
       { year: { $exists: false } },
@@ -35,7 +35,7 @@ async function fetchMovie(item) {
   })
 
   // [movies[0]] 限制1个，避免api请求过多被屏蔽
-  for (let i = 0; i < movies.length; i++) {
+  for (let i = 0; i < (movies[0]).length; i++) {
     let movie = movies[i]
     let movieData = await fetchMovie(movie)
 

@@ -54,5 +54,5 @@ movieSchema.pre('save', function(next) {
   next()
 })
 
-// 参数：模型名字，发布生成所需要的 Schema
+// 参数：模型名字，[发布]生成所需要的 Schema
 mongoose.model('Movie', movieSchema)

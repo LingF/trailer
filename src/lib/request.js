@@ -31,7 +31,7 @@ const _request = (params = {}, fn = () => {}) => {
     })
 }
 
-export default(param) => {
+export default (param) => {
   const type = typeof param
 
   if (type === 'function') {

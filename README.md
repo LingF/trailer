@@ -27,8 +27,16 @@ koa2项目
 14. cssnext node-sass autoprefixer
 15. nodemon koa-static
 16. antd@3.0.0 react@16.1.1 react-dom@16.1.1 react-router-dom@4.2.2
+17. axios
+18. moment
+19. bcrypt
 
 ### front
+* server
+    - database
+    - crawler 爬虫脚本
+    - tasks   任务
+    - index.js
 * src
     - assets 静态资源
     - commonents 组件

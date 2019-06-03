@@ -29,8 +29,8 @@ const useMiddlewares = app => {
   // const movies = await Movie.find({})
   // console.log(movies)
 
-  // require('./tasks/movie')
-  require('./tasks/api')
+  require('./tasks/movie')
+  // require('./tasks/api')
 
   const app = new Koa()
   // 自己的理解：子进程开启对全局未处理rejection的处理
