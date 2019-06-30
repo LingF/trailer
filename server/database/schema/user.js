@@ -41,7 +41,7 @@ const userSchema = new Schema({
 })
 
 // 记录错误次数，不需实时记录到mongo，利用虚拟字段
-userSchema.virtual('isLocked').get(() => {
+userSchema.virtual('isLocked').get(function() {
   return !!(this.lockUntil && this.lockUntil > Date.now())
 })
 

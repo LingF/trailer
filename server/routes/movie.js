@@ -13,11 +13,16 @@ const {
 
 // 装饰器；控制器，前缀；外层 - 路径空间
 @controller('/api/v0/movies')
-export class movieController {
+export class movieController { // 暴露一个类
 
   @get('/')
+  // 通过装饰器添加功能
+  // @login // 登录
+  // @admin(['developer']) // 权限
+  // @log  // 打印日志
   async getMovies (ctx, next) {
     const { type, year } = ctx.query
+    // 通过 service 获取
     const movies = await getAllMovies(type, year)
 
     ctx.body = {
@@ -27,7 +32,7 @@ export class movieController {
   }
 
   // @post
-  // @required({body: ['username', 'doubanId']})
+  // @required({body: ['username', 'doubanId']}) 检查字段
 
 
   @get('/:id')

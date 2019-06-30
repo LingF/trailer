@@ -13,8 +13,8 @@ const {
 @controller('/api/v0/user')
 export class userController {
   @post('/')
-  async login (ctx, next) {
-    const { email, password } = ctx.request.body
+  async login(ctx, next) {
+    const { email, password } = await parsePostData(ctx)//ctx.request.body
     const matchData = await checkPassword(email, password)
 
     if (!matchData.user) {
@@ -36,4 +36,32 @@ export class userController {
     })
 
   }
+}
+
+function parsePostData(ctx) {
+  return new Promise((resolve, reject) => {
+    try {
+      let postdata = "";
+      ctx.req.addListener('data', (data) => {
+        postdata += data
+      })
+      ctx.req.addListener("end", function () {
+        let parseData = parseQueryStr(postdata)
+        resolve(parseData)
+      })
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+function parseQueryStr(queryStr) {
+  let queryData = {}
+  let queryStrList = queryStr.split('&')
+  console.log('queryStrList', queryStrList)
+  for (let [index, queryStr] of queryStrList.entries()) {
+    let itemList = queryStr.split('=')
+    queryData[itemList[0]] = decodeURIComponent(itemList[1])
+  }
+  return queryData
 }

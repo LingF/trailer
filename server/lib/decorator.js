@@ -21,19 +21,23 @@ export class Route {
   }
 
   init() {
+    // path 里面任意js文件
     glob.sync(resolve(this.apiPath, '**/*.js')).forEach(require)
 
     for (let [conf, controller] of routerMap) {
+      // 1个或多个
       const controllers = isArray(controller)
-
-      const prefixPath = conf.target[symbolPrefix]
+      let prefixPath = conf.target[symbolPrefix]
       if (prefixPath) prefixPath = normalizePath(prefixPath)
+      // 前缀+当前path
       const routerPath = prefixPath + conf.path
-
+      // this.router = koa-router | get/put/... method
+      // 调用这个路由的函数
       this.router[conf.method](routerPath, ...controllers)
     }
-
+    // 注册完这些中间件可以应用这些所有路由规则
     this.app.use(this.router.routes())
+    // 应用所有请求的方法
     this.app.use(this.router.allowedMethods())
   }
 }
@@ -56,16 +60,17 @@ const router = conf => (target, key, descriptor) => {
   }, target[key])
 }
 
-// 修饰 + 地址
+// [装饰器] 接受一个地址参数
+// symbolPrefix -> 唯一
 export const controller = path => target => (target.prototype[symbolPrefix] = path)
 
-// 获取数据
+// [装饰器] 获取数据
 export const get = path => router({
   method: 'get',
   path: path
 })
 
-// 提交新建记录
+// [装饰器] 提交新建记录
 export const post = path => router({
   method: 'post',
   path: path

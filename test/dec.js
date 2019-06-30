@@ -1,3 +1,4 @@
+// 装饰器
 class Boy {
   @learn('中文')
   @speak

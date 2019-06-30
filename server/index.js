@@ -7,13 +7,13 @@ const R = require('ramda')
 const MIDDLEWARES = ['router', 'parcel']
 
 const useMiddlewares = app => {
-  R.map(
-    R.compose(
-      R.forEachObjIndexed(
-        initWidth => initWidth(app)
+  R.map( // 遍历所有中间件
+    R.compose( // 
+      R.forEachObjIndexed( // 3. 每个对象
+        initWidth => initWidth(app) // 4. 初始化每个暴露的函数
       ),
-      require,
-      name => resolve(__dirname, `./middlewares/${name}`)
+      require, // 2.
+      name => resolve(__dirname, `./middlewares/${name}`) // 1. 文件路径，往上传给 require
     )
   )(MIDDLEWARES)
 }
@@ -29,7 +29,7 @@ const useMiddlewares = app => {
   // const movies = await Movie.find({})
   // console.log(movies)
 
-  require('./tasks/movie')
+  // require('./tasks/movie')
   // require('./tasks/api')
 
   const app = new Koa()
